@@ -13,5 +13,12 @@ app.get('/movielist', (req, res) => {
     db.getAllMovies(res);
 });
 
+app.get('/searchMovie', (req,res) =>{
+    db.searchMovie(req , res);
+})
+
+app.post('/addMovie', (req,res) =>{
+    db.addMovie(req,res);
+})
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
