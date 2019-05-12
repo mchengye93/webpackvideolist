@@ -5,7 +5,8 @@ USE videolist;
 
 CREATE TABLE movies (
     id INT AUTO_INCREMENT UNIQUE,
-    title VARCHAR(255) NOT NULL
+    title VARCHAR(255) NOT NULL,
+    watched BOOLEAN DEFAULT FALSE
 
 );
 

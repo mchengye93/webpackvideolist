@@ -24,4 +24,8 @@ app.post('/addMovie', (req,res) =>{
     db.addMovie(req,res);
 })
 
+app.post('/toggleWatch',(req,res)=>{
+    db.toggleMovie(req,res);
+})
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

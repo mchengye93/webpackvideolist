@@ -12,6 +12,7 @@ class App extends React.Component {
         this.getAllMovies = this.getAllMovies.bind(this);
         this.searchMovie = this.searchMovie.bind(this);
         this.addMovie = this.addMovie.bind(this);
+        this.toggleWatch = this.toggleWatch.bind(this);
 
     }
     //after mount call database to get data and update state to movies in db
@@ -52,6 +53,12 @@ class App extends React.Component {
          .then(this.getAllMovies);
     
     }
+    toggleWatch(movieId){
+        console.log('toggleWatch called for ', movieId);
+        
+        axios.post('/toggleWatch', {id:movieId})
+        .then(this.getAllMovies);
+    }
 
     render() {
         if (this.state.movies.length === 0){
@@ -68,7 +75,7 @@ class App extends React.Component {
             <div>
                 <AddMovieForm addMovie ={this.addMovie}/>
                 <SearchMovieForm searchMovie={this.searchMovie}/>
-                <MovieList movies = {this.state.movies} />
+                <MovieList movies = {this.state.movies} toggleWatch={this.toggleWatch} />
             </div>
         )
         }

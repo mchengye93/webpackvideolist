@@ -44,8 +44,23 @@ const addMovie = function (req,res){
     })
 }
 
+const toggleMovie = function(req,res){
+    console.log('inside toggleMovie req', req.body.id);
+    // res.end();
+    connection.query(`UPDATE movies SET watched= !watched WHERE id=${req.body.id}`, (err,data)=>{
+        if (err){
+            res.status(500);
+            res.send(err);
+        } else {
+            console.log('movie watch updated!');
+            res.status(200);
+            res.send(data);
+        }
+    })
+}
 module.exports = {
     getAllMovies: getAllMovies,
     searchMovie: searchMovie,
-    addMovie: addMovie
+    addMovie: addMovie,
+    toggleMovie: toggleMovie
 }
