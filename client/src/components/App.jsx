@@ -22,13 +22,15 @@ class App extends React.Component {
     }
 
     getAllMovies() {
+        var movies = [];
         console.log('inside get all movies!');
         axios.get('/movielist')
         .then((data)=> {
-            console.log('axios get',data);
-            
+            console.log('axios get',data.data);
+            movies = data.data;
             this.setState({movies : data.data});
         })
+        this.setState({movies: movies});
     }
 
     searchMovie(searchTitle){
