@@ -1,6 +1,6 @@
 const React = require('react');
 
-class AddMovieForm extends React.Component {
+class SearchMovieForm extends React.Component {
     constructor(props){
         super(props);
 
@@ -15,7 +15,7 @@ class AddMovieForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.addMovie(this.state);
+        this.props.searchMovie(this.state.title);
     }
 
     handleChange(e){
@@ -27,12 +27,12 @@ class AddMovieForm extends React.Component {
     render() {
         return(
         <form onSubmit={this.handleSubmit}>
-            <label> 
-                <input name="title" placeholder="add movie..."value={this.state.title} onChange={this.handleChange} />
+            <label>
+                <input name="title" placeholder="search movie..." value={this.state.title} onChange={this.handleChange} />
             </label>
-            <input type= "submit" value = "Add Movie" />
+            <input type= "submit" value = "Search" />
         </form>
     )
         }
 }
-export default AddMovieForm;
+export default SearchMovieForm;

@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import MovieList from './MovieList.jsx';
 import AddMovieForm from './AddMovieForm.jsx';
+import SearchMovieForm from './SearchMovieForm.jsx';
 class App extends React.Component {
     constructor(props){
         super(props);
@@ -10,30 +11,34 @@ class App extends React.Component {
 
         this.getAllMovies = this.getAllMovies.bind(this);
         this.searchMovie = this.searchMovie.bind(this);
+        this.addMovie = this.addMovie.bind(this);
 
     }
     //after mount call database to get data and update state to movies in db
     componentDidMount() {
         this.getAllMovies();
-        this.searchMovie('a');
+        //this.searchMovie('a');
     }
 
-    getAllMovies(){
+    getAllMovies() {
+        console.log('inside get all movies!');
         axios.get('/movielist')
         .then((data)=> {
-            //console.log(data);
+            console.log('axios get',data);
+            
             this.setState({movies : data.data});
         })
     }
 
     searchMovie(searchTitle){
-
+        
         axios.get('/searchMovie',{
         params: {
             title: searchTitle
         }})
-        .then(function(response) {
+        .then((response) => {
             console.log(response.data);
+            this.setState({movies: response.data});
         })
         .catch(function(error) {
             console.log(error);
@@ -41,20 +46,19 @@ class App extends React.Component {
     }
 
     addMovie(title) {
-        console.log(title);
-        // axios.post('/addMovie', title)
-        // .then((response)=> {
-
-        //     //if get response update all movies
-        //     this.getAllMovies();
-        // })
+        console.log('called addMoive from client!',title);
+         axios.post('/addMovie', title)
+         .then(()=> {this.getAllMovies});
+    
     }
 
     render() {
         
         return (
             <div>
+                
                 <AddMovieForm addMovie ={this.addMovie}/>
+                <SearchMovieForm searchMovie={this.searchMovie}/>
                 <MovieList movies = {this.state.movies} />
             </div>
         )
