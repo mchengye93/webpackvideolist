@@ -18,7 +18,7 @@ class Movie extends React.Component{
         if (this.state.movie.watched){
         return (
             <div id="movie">
-            <span>{this.state.movie.title}</span><button onClick={this.toggleWatch}>Watched</button>
+            <span>{this.state.movie.title}</span><button id="watched"onClick={this.toggleWatch}>Watched</button>
             </div>
         ) 
     } else{

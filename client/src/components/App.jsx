@@ -103,7 +103,7 @@ class App extends React.Component {
             <div>
                 <AddMovieForm addMovie ={this.addMovie}/>
                 <SearchMovieForm searchMovie={this.searchMovie}/>
-                <button onClick={this.watched}>Watched</button><button onClick={this.unWatched}>To watch</button>
+                <button id="watched "onClick={this.watched}>Watched</button><button onClick={this.unWatched}>To watch</button>
                 <MovieList movies = {this.state.movies} toggleWatch={this.toggleWatch} />
             </div>
         )
