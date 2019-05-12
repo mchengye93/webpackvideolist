@@ -13,6 +13,8 @@ class App extends React.Component {
         this.searchMovie = this.searchMovie.bind(this);
         this.addMovie = this.addMovie.bind(this);
         this.toggleWatch = this.toggleWatch.bind(this);
+        this.watched = this.watched.bind(this);
+        this.unWatched = this.unWatched.bind(this);
 
     }
     //after mount call database to get data and update state to movies in db
@@ -61,6 +63,29 @@ class App extends React.Component {
         axios.post('/toggleWatch', {id:movieId})
         .then(this.getAllMovies);
     }
+    watched(){
+        var movies = [];
+        axios.get('/watchMovies',{params: {
+            watched: true
+        }}).then((results)=>{
+            console.log(results.data);
+            movies = results.data;
+            this.setState({movies: results.data});
+        })
+        this.setState({movies: movies})
+    }
+
+    unWatched(){
+        var movies = [];
+        axios.get('/watchMovies',{params: {
+            watched: false
+        }}).then((results)=>{
+            console.log(results.data);
+            movies = results.data;
+            this.setState({movies: results.data});
+        })
+        this.setState({movies: movies})
+    }
 
     render() {
         if (this.state.movies.length === 0){
@@ -68,6 +93,7 @@ class App extends React.Component {
             <div>
                 <AddMovieForm addMovie ={this.addMovie}/>
                 <SearchMovieForm searchMovie={this.searchMovie}/>
+                <button onClick={this.watched}></button>Watched<button onClick={this.unWatched}>To watch</button>
                 <div>Sorry no movies!</div>
             </div>
             )
@@ -77,6 +103,7 @@ class App extends React.Component {
             <div>
                 <AddMovieForm addMovie ={this.addMovie}/>
                 <SearchMovieForm searchMovie={this.searchMovie}/>
+                <button onClick={this.watched}>Watched</button><button onClick={this.unWatched}>To watch</button>
                 <MovieList movies = {this.state.movies} toggleWatch={this.toggleWatch} />
             </div>
         )

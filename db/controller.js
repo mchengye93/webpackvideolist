@@ -58,9 +58,27 @@ const toggleMovie = function(req,res){
         }
     })
 }
+
+const watchMovies = function(req,res) {
+    console.log('inside db.watchmovies req.query', req.query);
+    connection.query(`SELECT * FROM movies WHERE watched= ${req.query.watched}`, (err,data)=> {
+        if (err){
+            console.log('err search query' ,err);
+            res.status(500);
+            res.send(err);
+        } else {
+            console.log(data);
+            res.status(200);
+            res.send(data);
+        }
+    })
+    //res.end();
+
+}
 module.exports = {
     getAllMovies: getAllMovies,
     searchMovie: searchMovie,
     addMovie: addMovie,
-    toggleMovie: toggleMovie
+    toggleMovie: toggleMovie,
+    watchMovies: watchMovies
 }
