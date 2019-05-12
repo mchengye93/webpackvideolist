@@ -36,19 +36,21 @@ class App extends React.Component {
     }
 
     searchMovie(searchTitle){
-        
+        var movies= [];
         axios.get('/searchMovie',{
         params: {
             title: searchTitle
         }})
         .then((response) => {
             console.log(response.data);
+            movies = response.data;
             this.setState({movies: response.data});
            
         })
         .catch(function(error) {
             console.log(error);
         })
+        this.setState({movies:movies});
     }
 
     addMovie(title) {
