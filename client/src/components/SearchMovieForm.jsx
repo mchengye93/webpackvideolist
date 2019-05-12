@@ -15,7 +15,9 @@ class SearchMovieForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.searchMovie(this.state.title);
+        var searchTitle = this.state.title;
+        this.setState({title:""});
+        this.props.searchMovie(searchTitle);
     }
 
     handleChange(e){

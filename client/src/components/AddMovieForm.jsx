@@ -15,7 +15,9 @@ class AddMovieForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.addMovie(this.state);
+        var movie = this.state;
+        this.setState({title:""});
+        this.props.addMovie(movie);
     }
 
     handleChange(e){

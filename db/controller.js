@@ -15,7 +15,7 @@ const getAllMovies = function(res) {
 const searchMovie = function (req,res){
     console.log('inside db controller searchMovie req:',req.query.title);
     //${req.query.title}
-    connection.query("SELECT title FROM movies WHERE title LIKE '" +req.query.title+"%'", (err,data)=> {
+    connection.query("SELECT title FROM movies WHERE title LIKE '%" +req.query.title+"%'", (err,data)=> {
         if (err){
             console.log('err search query' ,err);
             res.status(500);

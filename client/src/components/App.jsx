@@ -39,6 +39,7 @@ class App extends React.Component {
         .then((response) => {
             console.log(response.data);
             this.setState({movies: response.data});
+           
         })
         .catch(function(error) {
             console.log(error);
@@ -48,20 +49,29 @@ class App extends React.Component {
     addMovie(title) {
         console.log('called addMoive from client!',title);
          axios.post('/addMovie', title)
-         .then(()=> {this.getAllMovies});
+         .then(this.getAllMovies);
     
     }
 
     render() {
-        
-        return (
+        if (this.state.movies.length === 0){
+            return(
             <div>
-                
+                <AddMovieForm addMovie ={this.addMovie}/>
+                <SearchMovieForm searchMovie={this.searchMovie}/>
+                <div>Sorry no movies!</div>
+            </div>
+            )
+        }
+        else {
+            return (
+            <div>
                 <AddMovieForm addMovie ={this.addMovie}/>
                 <SearchMovieForm searchMovie={this.searchMovie}/>
                 <MovieList movies = {this.state.movies} />
             </div>
         )
+        }
     }
 
 }
